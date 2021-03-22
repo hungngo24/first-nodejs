@@ -1,9 +1,11 @@
 const express = require('express')
-const morgan= require('morgan')
+const morgan= require('morgan')// console.log sever
 const path= require('path')
 const exphbs  = require('express-handlebars')
 const app = express()
 const port = 3000
+
+const route= require('./routes')
 
 // morgan
 app.use(morgan('combined'))
@@ -12,6 +14,12 @@ app.use(morgan('combined'))
 app.engine('hbs', exphbs({
   extname:'.hbs'
 }));
+
+//middleware
+app.use(express.urlencoded({extended:true})) // html
+
+app.use(express.json()) //req = js
+
 
 app.set('view engine', 'hbs');
 
@@ -22,14 +30,7 @@ console.log("path:",path.join(__dirname,'resources','views'))
 // 
 app.use(express.static(path.join(__dirname,'public')))
 
-
-app.get('/', (req, res) => {
-  res.render('home')
-})
-
-app.get('/about', (req, res) => {
-  res.render('about')
-})
+route(app) 
 
 
 
