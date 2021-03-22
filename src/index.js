@@ -7,13 +7,18 @@ const port = 3000
 
 const route= require('./routes')
 
+//db
+const db = require('./config/db')
+db.connect()
+console.log("connect",db)
+
 // morgan
 app.use(morgan('combined'))
 
 //express handlebars
 app.engine('hbs', exphbs({
   extname:'.hbs'
-}));
+}))
 
 //middleware
 app.use(express.urlencoded({extended:true})) // html
