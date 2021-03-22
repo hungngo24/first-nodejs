@@ -4,6 +4,10 @@ const path= require('path')
 const exphbs  = require('express-handlebars')
 const app = express()
 const port = 3000
+const cors = require('cors')
+
+
+app.use(cors())
 
 const route= require('./routes')
 
